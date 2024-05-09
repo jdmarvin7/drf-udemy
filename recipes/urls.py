@@ -1,6 +1,6 @@
 from django.urls import path
-
 from .views import site, api
+from .views.class_based_view import mixins
 
 app_name = 'recipes'
 
@@ -47,14 +47,26 @@ urlpatterns = [
     ),
     path(
         'api/recipes/',
+        # view usando @api_view()
         # api.recipe_list,
-        api.RecipesView.as_view(),
+
+        # view usando APIView
+        # api.RecipesView.as_view(),
+
+        # view usando generics views
+        mixins.RecipeMixinsView.as_view(),
         name='api_list_recipes'
     ),
     path(
         'api/recipes/<int:pk>/',
+        # @api_view()
         # api.recipe_api_detail,
-        api.RecipesDetailView.as_view(),
+
+        # APIView
+        # api.RecipesDetailView.as_view(),
+
+        # generics view
+        mixins.RecipeMixinsDetailView.as_view(),
         name='api_recipes_detail'
     )
 ]
