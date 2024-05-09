@@ -46,13 +46,15 @@ urlpatterns = [
         name='theory',
     ),
     path(
-        'api/recipes',
-        api.recipe_list,
+        'api/recipes/',
+        # api.recipe_list,
+        api.RecipesView.as_view(),
         name='api_list_recipes'
     ),
     path(
         'api/recipes/<int:pk>/',
-        api.recipe_api_detail,
+        # api.recipe_api_detail,
+        api.RecipesDetailView.as_view(),
         name='api_recipes_detail'
     )
 ]
