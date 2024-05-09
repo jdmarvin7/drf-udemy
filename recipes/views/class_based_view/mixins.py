@@ -2,7 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework import mixins
-
+from rest_framework import viewsets
 from recipes.models import Recipe
 from recipes.serializers import RecipeSerializer
 
@@ -38,4 +38,8 @@ class RecipeMixinsDetailView(RetrieveUpdateDestroyAPIView):
             serializer.data
         )
 
-    
+# Viewsets
+class RecipeViewset(viewsets.ModelViewSet):
+    queryset = Recipe.objects.get_published()
+    serializer_class = RecipeSerializer
+    pagination_class = RecipeAPIPagination

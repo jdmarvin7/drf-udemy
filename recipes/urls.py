@@ -58,6 +58,26 @@ urlpatterns = [
         name='api_list_recipes'
     ),
     path(
+        'api/v2/recipes/',
+        # view usando @api_view()
+        # api.recipe_list,
+
+        # view usando APIView
+        # api.RecipesView.as_view(),
+
+        # view usando generics views
+        # mixins.RecipeMixinsView.as_view(),
+
+        # Viewsets
+        mixins.RecipeViewset.as_view({
+            'get': 'list',
+            'post': 'create',
+            'patch': 'partial_update',
+            'delete': 'destroy',
+        }),
+        name='api_list_recipes_v2'
+    ),
+    path(
         'api/recipes/<int:pk>/',
         # @api_view()
         # api.recipe_api_detail,
